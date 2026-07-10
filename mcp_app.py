@@ -17,7 +17,7 @@ from mcp.server.fastmcp import FastMCP
 
 from notes.models import Note
 
-mcp = FastMCP("Django Notes MCP")
+mcp = FastMCP("Django Notes MCP", port=8001)
 
 
 def _serialize(n: Note) -> dict:
