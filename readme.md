@@ -26,14 +26,14 @@ Django site (admin, etc.) on port 8000:
 .\.venv\Scripts\python.exe manage.py runserver
 ```
 
-MCP server (streamable-http transport) on port 8000 by default — run on a
-different port if running both at once, e.g. `mcp.run(transport="streamable-http", port=8001)`:
+MCP server (streamable-http transport) on port 8001, so it can run
+alongside the Django dev server on port 8000:
 
 ```powershell
 .\.venv\Scripts\python.exe mcp_app.py
 ```
 
-The MCP endpoint is served at `http://127.0.0.1:8000/mcp`.
+The MCP endpoint is served at `http://127.0.0.1:8001/mcp`.
 
 ## Tools exposed
 
