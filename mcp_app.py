@@ -9,6 +9,8 @@ import os
 
 import django
 
+# Must run before importing anything that touches Django models (e.g. notes.models) —
+# app registry isn't populated until django.setup() completes.
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
 django.setup()
 
@@ -27,6 +29,8 @@ def _serialize(n: Note) -> dict:
 @mcp.tool()
 async def list_notes() -> list[dict]:
     """List all notes, most recent first."""
+    # FastMCP tools run on the asyncio event loop, but Django's ORM is sync-only;
+    # sync_to_async hops to a worker thread so the ORM call doesn't block the loop.
     notes = await sync_to_async(list)(Note.objects.order_by("-created_at"))
     return [_serialize(n) for n in notes]
 
